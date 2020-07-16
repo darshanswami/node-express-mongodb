@@ -1,9 +1,9 @@
-if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config();
-}
+// if (process.env.NODE_ENV !== 'production') {
+//     require('dotenv').config();
+// }
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
 const app = express();
 
@@ -16,10 +16,9 @@ app.use(expressLayouts);
 app.use(express.static('public'));
 
 // DB connection
-mongoose.connect(process.env.DATABASE_URL,{useNewUrlParser: true, useUnifiedTopology: true});
-mongoose.connection.on('error', err => {logError(err);});
-const db = mongoose.connection;
-
+// mongoose.connect(process.env.DATABASE_URL,{useNewUrlParser: true, useUnifiedTopology: true});
+// mongoose.connection.on('error', err => {logError(err);});
+// const db = mongoose.connection;
 
 app.use('/', indexRouter);
 
