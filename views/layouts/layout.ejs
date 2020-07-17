@@ -1,45 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>My Node JS and express JS Project</title>
+  <title>Darshan Project | <%- title %></title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
-    .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
-    }
-    
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 450px}
-    
-    /* Set gray background color and 100% height */
-    .sidenav {
-      padding-top: 20px;
-      background-color: #f1f1f1;
-      height: 100%;
-    }
-    
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
-    }
-    
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height:auto;} 
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="/style.css">
 </head>
 <body>
 
@@ -57,11 +25,15 @@
 	    </div>
 	    <div class="collapse navbar-collapse" id="myNavbar">
 	      <ul class="nav navbar-nav">
-	        <li class="active"><a href="/">Home</a></li>
-	        <li><a href="/about">About</a></li>
+	        <li <% if (page_name === 'home') { %>class="active" <% } %>><a href="/">Home</a></li>
+	        <li <% if (page_name === 'about') { %>class="active" <% } %>><a href="/about">About</a></li>
+	        <li <% if (page_name === 'post') { %>class="active" <% } %>><a href="/post">Post</a></li>
+	        <li <% if (page_name === 'add_post') { %>class="active" <% } %>><a href="/post/create">Create Post</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	        <li><a href="#" style="padding: 0;">
+	        	<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAADCklEQVRoge2YzW8NURjGf88lVBcWmkjYqUobQrUsSHQrFl1IRFcSEcSClQ0LYWGBP0BYoBIJm7KhqFiItkqibhsk5aqob/FNfea2r0WH3N7e+R5XJPNLJpM573vOeZ45M3POGUhJSUlJiYG8gtbEd2BqmbT85oc6qQianPGJf4opJgofwyT7GQjVWEL85wb0vxuwJA0YL2OJiYLxKky63wjcjyElGuJemHRvAxkGYomJgsL16W0gH+5uJMLuU41mdt3Mhp2jx8y2mdmUUuneE9lypjGZYfwftWTIZODiZ6ioLBXNAs2Sno+r4tWeevgGPExOoQ+zqqGi8imwFpjuHGuAHNAAnC0eCf87K64lr9SFuqVfgXpJbZI+O8cZYBnwDGgENhdWCfJolM9APn9C0rviYqdsu3O5rjDmbyBDdyLigvDi0TGPaIdzXlBY6PkSAxiIJt4AM2JIC8IHOqkSjJbUYVYFvAHeS/qjxXcEBAZ0JSbTnatu4h2anfPdwsKgn8cLkSSFQZx3C5lZJbDHuTxZGAtmQLRHFhaUPBdLFZvZJKAVmMPY0uZ4YTyQAV3lCcadmBK9uK1rDBUXmtks4BzQAnwB1kv6VpgTfIbN/MVRKHp8zGymme0CbgOrgGHGZuHrE2UF7+R0TJnuNG/JmtlKM9tjZpeAx8BeoAq4DCySdKW0rBBYEzmgJqbc8cyuhlMPQOOkjADtwCGgQ5K5VZ8cqjOjDbEzik5XmlYPIw0Br4FeoAfolhRoMxVuBFZQj+gLr9KrURari/6o1UMtk9VFf8IGsnHEQ5R1/iitcTosIsm2gmHtrQttJG+x+fnD7Pzh+WU3AGB3bzyJbeBGRyI/DCa8xNmBB66frH9BQ12N54dmwjsgs/1/T05IpH2+KaUK+wYGdxj/1ohhBxrr5vnOOa7Dc2sgt1HoIGX+vS74Dtq6uG6u1+6sMN+dvlyuYXRERzS2mS4HN02ZTY211YHnBv8tpVkme3+wRaYNYEsYW2AlyVtQrxg9Wl9b0ybJa1eWkpKSkpIsvwAQhW4BayxjiAAAAABJRU5ErkJggg==">
+	        </a></li>
 	      </ul>
 	    </div>
   	</div>
@@ -78,7 +50,9 @@
       <p><a href="#">Link</a></p> -->
     </div>
     <div class="col-sm-8 text-left"> 
-      <%- body %>
+    	<div class="container-body">
+    		<%- body %>
+    	</div>
     </div>
     <div class="col-sm-2 sidenav">
       <!-- <div class="well">
@@ -91,9 +65,7 @@
   </div>
 </div>
 
-<footer class="container-fluid text-center">
-  <p>Welcome to My World</p>
-</footer>
+<%- include('./footer.ejs'); %>
 
 </body>
 </html>
