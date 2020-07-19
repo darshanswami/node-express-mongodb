@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+var moment = require('moment');
 
 const Blog = require('./../models/blog');
 
@@ -29,7 +30,8 @@ router.get('/post', (req, res)=>{
             res.render('post',{
                 title: 'Post',
                 page_name: 'post',
-                posts: result
+                posts: result,
+                moment: moment
             });
         })
         .catch((err)=>{
@@ -43,6 +45,7 @@ router.get('/post', (req, res)=>{
 });
 
 router.get('/post/:id', (req, res)=>{
+
     var params = req.params;
     Blog.findById(params.id)
         .then((result)=>{
@@ -62,7 +65,37 @@ router.get('/post/:id', (req, res)=>{
     
 });
 
+router.get('/posts/create', (req, res)=>{
+    
+    res.render('add_post',{
+        title: 'Add new post',
+        page_name: 'add_post'
+    });
+});
+
+router.get('/posts/edit/:id', (req, res)=>{
+
+    var params = req.params;
+    Blog.findById(params.id)
+        .then((result)=>{
+            res.render('edit_post',{
+                title: 'Edit Post',
+                page_name: 'edit_post',
+                post: result
+            });
+        })
+        .catch((err)=>{
+            res.render('post_detail',{
+                title: 'Post',
+                page_name: 'post',
+                post: []
+            });
+        })
+    
+});
+
 router.delete('/delete_post/:id', (req, res)=>{
+
     var id = req.params.id;
     Blog.findByIdAndDelete(id)
         .then((result)=>{
@@ -92,12 +125,23 @@ router.post('/add-post', (req, res)=>{
 
 });
 
-router.get('/post/create', (req, res)=>{
+router.post('/edit-post/:id', (req, res)=>{
     
-    res.render('add_post',{
-        title: 'Add new post',
-        page_name: 'add_post'
-    });
+    var id = req.params.id;
+    const data = {
+         title: req.body.title,
+         snippet: req.body.snippet,
+         description: req.body.description
+    };
+
+     Blog.updateOne({ _id: id }, data)
+         .then((result) =>{
+             res.redirect('/post/'+id);
+         })
+         .catch((err) =>{
+             console.log(err);
+         });
+
 });
 
 router.use((req, res)=>{

@@ -3,7 +3,8 @@
 	<h1><%= post.title%></h1>
 	<p><%= post.description%></p>
 </div>
-<a data-doc="<%= post._id %>" href="javascript:" class="pull-right" id="deleteButton">Delete</a>
+<a data-doc="<%= post._id %>" href="javascript:" class="pull-right btn btn-danger" id="deleteButton">Delete</a>
+<a href="/posts/edit/<%= post._id %>" class="pull-right btn btn-primary" id="deleteButton">Edit</a>
 
 <script>
 	const deleteButton = document.querySelector('#deleteButton');
