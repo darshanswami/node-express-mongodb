@@ -20,7 +20,7 @@ app.use('/', indexRouter);
 // DB connection
 const mongoURL = "mongodb+srv://root:node123@mynode.zgmzl.mongodb.net/node-project?retryWrites=true&w=majority";
 mongoose.connect(mongoURL,{useNewUrlParser: true, useUnifiedTopology: true});
-mongoose.connection.on('error', err => {logError(err);});
+mongoose.connection.on('error', err => {console.log(err);});
 const db = mongoose.connection;
 // root/node123
 
