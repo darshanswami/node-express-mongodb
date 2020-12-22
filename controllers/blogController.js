@@ -14,6 +14,12 @@ const blog_about = (req, res) => {
     	page_name: 'about'
     });
 }
+const blog_contactus = (req, res) => {
+	res.render('contactus',{
+    	title: 'Contact us',
+    	page_name: 'contactus'
+    });
+}
 const blog_post = (req, res) => {
 	
     Blog.find().sort({ createdAt: -1})
@@ -129,6 +135,7 @@ const blog_post_delete = (req, res) => {
 module.exports = {
 	blog_index,
 	blog_about,
+	blog_contactus,
 	blog_post,
 	blog_post_detail,
 	blog_post_create_form,

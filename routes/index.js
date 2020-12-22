@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.get('/', blogController.blog_index);
 router.get('/about', blogController.blog_about);
+router.get('/contactus', blogController.blog_contactus);
 router.get('/post', blogController.blog_post);
 router.get('/post/:id', blogController.blog_post_detail);
 router.get('/posts/create', blogController.blog_post_create_form);
